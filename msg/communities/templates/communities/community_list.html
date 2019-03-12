@@ -1,0 +1,35 @@
+{% extends "communities/layout.html" %}
+
+{% block pre_community_content %}
+<div class="col-md-4">
+	<div class="card card-with-shadow">
+		<div class="content">
+			<h5 class="title">Communities</h5>
+			<p>STB communities are a great place to find people to help you with projects or projects that could benefit from your particular set of skills. No, not tracking down smugglers, but coding, designing, writing, and other programming-related talents.</p>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block community_content %}
+<div class="col-md-8">
+	<div class="list-group">
+		{% for community in object_list %}
+		<a class="list-group-item container-fluid" href="{% url 'communities:single' slug=community.slug %}">
+			<h5 class="title list-group-item-heading">{{ community.name }}</h5>
+			<div class="list-group-item-text container-fluid">
+				{{ community.description_html|safe }}
+				<div class="row">
+					<div class="col-md-4">
+						<span class="badge">{{ community.members.count }}</span> member{{ community.members.count|pluralize }}
+					</div>
+					<div class="col-md-4">
+						<span class="badge">{{ community.posts.count }}</span> post{{ community.posts.count|pluralize }}
+					</div>
+				</div>
+			</div>
+		</a>
+		{% endfor %}
+	</div>
+</div>
+{% endblock %}
