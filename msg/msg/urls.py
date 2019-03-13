@@ -25,11 +25,10 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r"^$", views.Home.as_view(), name="home"),
     url(r"^admin/", admin.site.urls),
-    url(r"^accounts/", include("accounts.urls", namespace="accounts")),  
-    url(r"^accounts/", include("django.contrib.auth.urls")),     
-    url(r"^posts/", include("posts.urls", namespace="posts")),
-    url(r"^communities/",
-        include("communities.urls", namespace="communities")),
+    url(r'^accounts/', include(('accounts.urls', 'accounts'), namespace='accounts')),
+    url(r"^accounts/", include("django.contrib.auth.urls")),
+    url(r'^posts/', include(('posts.urls', 'posts'), namespace='posts')),
+    url(r'^communities/', include(('communities.urls', 'communities'), namespace='communities')),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

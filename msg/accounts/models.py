@@ -5,8 +5,10 @@ from django.contrib.auth.models import (
     PermissionsMixin
 )
 
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.utils import timezone
+
+from django.db import models
 
 
 # Create your models here.
@@ -60,11 +62,34 @@ class User(AbstractBaseUser, PermissionsMixin):
         return "{} @{}".format(self.username)
 
     def get_absolute_url(self):
-        return reverse('accounts:profile')
+        return reverse('accounts:profile-update', kwargs={'pk': self.pk})
+
+    def __unicode__(self):
+        return "%s %s" % (self.first_name, self.last_name)
 
 
 class Skills(models.Model):
-    skill_name = models.CharField(max_length=255, unique=True)
     user = models.ForeignKey(User, related_name='skills',
                              on_delete=models.CASCADE)
+    skill_name = models.CharField(max_length=255, unique=True)
+
+
+
+class Profile(models.Model):
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    created_date = models.DateTimeField(default=timezone.now)
+
+    def get_absolute_url(self):
+        return reverse('accounts:profile-update', kwargs={'pk': self.pk})
+
+    def __unicode__(self):
+        return "%s %s" % (self.first_name, self.last_name)
+
+
+class FamilyMember(models.Model):
+    profile = models.ForeignKey(Profile, related_name='familymember',
+                             on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    relationship = models.CharField(max_length=100)
 

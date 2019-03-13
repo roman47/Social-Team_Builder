@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.db import models
 from django.utils.text import slugify
 
@@ -49,8 +49,8 @@ class Community(models.Model):
 
 
 class CommunityMember(models.Model):
-    community = models.ForeignKey(Community, related_name="memberships")
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="communities")
+    community = models.ForeignKey(Community, related_name="memberships",on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="communities",on_delete=models.CASCADE)
     role = models.IntegerField(choices=MEMBERSHIP_CHOICES, default=1)
 
     def __str__(self):

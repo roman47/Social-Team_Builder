@@ -8,17 +8,8 @@ from . import models
 class SkillsSerializer(serializers.ModelSerializer):
     class Meta:
         fields = (
-            'id',
-            'age',
-            'gender',
-            'size'
+            'skill_name',
         )
-        model = models.UserPref
+        model = models.Skills
 
-    def create(self, validated_data):
-        user = self.context['request'].user
-        userpref = models.UserPref.objects.create(
-            user=user,
-            **validated_data
-        )
-        return userpref
+

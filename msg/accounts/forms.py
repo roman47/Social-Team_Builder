@@ -4,6 +4,7 @@ from django.contrib.auth import get_user_model
 from django.forms import inlineformset_factory,ModelForm,modelformset_factory
 from . import models
 
+
 from django.forms.models import BaseInlineFormSet
 
 class UserCreateForm(UserCreationForm):
@@ -33,22 +34,21 @@ class SkillForm(ModelForm):
         fields = '__all__'
 
 
-def get_skills_formset(form, formset=BaseInlineFormSet, **kwargs):
-    return inlineformset_factory(models.User, models.Skills, form,
-                                formset, **kwargs)
+SkillFormSet = inlineformset_factory(models.User, models.Skills,
+form=SkillForm, extra=1)
 
-SkillsFormSet = modelformset_factory(
-    models.Skills,
-    form=SkillForm,
 
-)
+class ProfileForm(ModelForm):
+    class Meta:
+        model = models.Profile
+        exclude = ()
 
-SkillsInlineFormSet = inlineformset_factory(
-    models.User,
-    models.Skills,
-    fields=('skill_name',),
-    formset=SkillsFormSet,
-    min_num=1,
-    can_delete=True,
-)
 
+class FamilyMemberForm(ModelForm):
+    class Meta:
+        model = models.FamilyMember
+        exclude = ()
+
+
+FamilyMemberFormSet = inlineformset_factory(models.Profile, models.FamilyMember,
+form=FamilyMemberForm, extra=1)
