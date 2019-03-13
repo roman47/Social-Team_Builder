@@ -4,12 +4,11 @@ from rest_framework import serializers
 from . import models
 
 
-
-class SkillsSerializer(serializers.ModelSerializer):
+class SkillSerializer(serializers.ModelSerializer):
     class Meta:
         fields = (
             'skill_name',
         )
-        model = models.Skills
+        model = models.Skill
 
 

@@ -30,12 +30,12 @@ class UserForm(ModelForm):
 
 class SkillForm(ModelForm):
     class Meta:
-        model = models.Skills
+        model = models.Skill
         fields = '__all__'
 
 
-SkillFormSet = inlineformset_factory(models.User, models.Skills,
-form=SkillForm, extra=1)
+SkillFormSet = inlineformset_factory(models.User, models.Skill,
+                                     form=SkillForm, extra=1)
 
 
 class ProfileForm(ModelForm):

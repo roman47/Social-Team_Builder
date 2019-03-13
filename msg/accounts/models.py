@@ -68,11 +68,26 @@ class User(AbstractBaseUser, PermissionsMixin):
         return "%s %s" % (self.first_name, self.last_name)
 
 
-class Skills(models.Model):
-    user = models.ForeignKey(User, related_name='skills',
+class Skill(models.Model):
+    user = models.ForeignKey(User, related_name='skill',
                              on_delete=models.CASCADE)
     skill_name = models.CharField(max_length=255, unique=True)
 
+
+class Project(models.Model):
+    owner = models.ForeignKey(User, related_name='project',
+                             on_delete=models.CASCADE)
+    name = models.CharField(max_length=40, unique=True)
+    description = models.CharField(max_length=140)
+    timeline = models.CharField(max_length=100)
+    app_requirements = models.CharField(max_length=100)
+
+
+class Position(models.Model):
+    project = models.ForeignKey(Project, related_name='project',
+                             on_delete=models.CASCADE)
+    name = models.CharField(max_length=40, unique=True)
+    description = models.CharField(max_length=140)
 
 
 class Profile(models.Model):

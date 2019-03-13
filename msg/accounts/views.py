@@ -52,7 +52,7 @@ class SignUp(generic.CreateView):
 
 class ProfileView(SelectRelatedMixin, generic.DetailView):
     template_name = 'accounts/profile.html'
-    select_related = ("skills", )
+    select_related = ("skill", )
 
     def get_object(self):
         #import pdb;
@@ -68,20 +68,20 @@ class UserSkillUpdate(UpdateView):
     def get_context_data(self, **kwargs):
         data = super(UserSkillUpdate, self).get_context_data(**kwargs)
         if self.request.POST:
-            data['skills'] = forms.SkillFormSet(self.request.POST, instance=self.object)
+            data['skill'] = forms.SkillFormSet(self.request.POST, instance=self.object)
         else:
-            data['skills'] = forms.SkillFormSet(instance=self.object)
+            data['skill'] = forms.SkillFormSet(instance=self.object)
         return data
 
     def form_valid(self, form):
         context = self.get_context_data()
-        skills = context['skills']
+        skill = context['skill']
         with transaction.atomic():
             self.object = form.save()
 
-            if skills.is_valid():
-                skills.instance = self.object
-                skills.save()
+            if skill.is_valid():
+                skill.instance = self.object
+                skill.save()
         return super(UserSkillUpdate, self).form_valid(form)
 
 
@@ -119,20 +119,20 @@ class UserSkillCreate(generic.CreateView):
     def get_context_data(self, **kwargs):
         data = super(UserSkillCreate, self).get_context_data(**kwargs)
         if self.request.POST:
-            data['skills'] = forms.SkillFormSet(self.request.POST)
+            data['skill'] = forms.SkillFormSet(self.request.POST)
         else:
-            data['skills'] = forms.SkillFormSet()
+            data['skill'] = forms.SkillFormSet()
         return data
 
     def form_valid(self, form):
         context = self.get_context_data()
-        skills = context['skills']
+        skill = context['skill']
         with transaction.atomic():
             self.object = form.save()
 
-            if skills.is_valid():
-                skills.instance = self.object
-                skills.save()
+            if skill.is_valid():
+                skill.instance = self.object
+                skill.save()
         return super(UserSkillCreate, self).form_valid(form)
 
 
