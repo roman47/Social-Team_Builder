@@ -1,0 +1,91 @@
+{% extends "layout.html" %}
+
+{% block title_tag %} New Project | {{ block.super }} {% endblock %}
+
+{% block body_content %}<div class="col-md-4">
+        <form action="" enctype="multipart/form-data" method="post">{% csrf_token %}
+            {{ form.as_p }}
+
+            <table class="table">
+                {{ position.management_form }}
+
+                {% for form in position.forms %}
+                    {% if forloop.first %}
+                        <thead>
+                        <tr>
+                            {% for field in form.visible_fields %}
+                                <th>{{ field.label|capfirst }}</th>
+                            {% endfor %}
+                        </tr>
+                        </thead>
+                    {% endif %}
+                    <tr class="{% cycle row1 row2 %} formsetPosition_row">
+                        {% for field in form.visible_fields %}
+                            <td>
+                                {# Include the hidden fields in the form #}
+                                {% if forloop.first %}
+                                    {% for hidden in form.hidden_fields %}
+                                        {{ hidden }}
+                                    {% endfor %}
+                                {% endif %}
+                                {{ field.errors.as_ul }}
+                                {{ field }}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+
+
+            <input type="submit" value="Save Changes"/> <a href="{% url 'home' %}"> back to home</a>
+        </form>
+    </div>
+
+{% endblock %}
+  <!--<div class="circle--actions--bar">
+    <div class="bounds">
+      <div class="grid-100">
+        <a class="button button-primary" href="project.html">Save Project</a>
+        <a class="button button-text" href="index.html">Discard</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="bounds circle--page circle--article">
+    <div class="grid-70">
+      <div class="circle--article--body">
+        <input type="text" class="circle--input--h1" placeholder="Project Title" />
+        <textarea placeholder="Project description..."></textarea>
+      </div>
+
+      <div class="circle--project--positions">
+        <h2>Positions</h2>
+
+        <ul class="circle--group--list circle--clone--list">
+          <li>
+            <input type="text" class="circle--input--h3" placeholder="Position Title" />
+            <textarea placeholder="Position description..."></textarea>
+            <a class="circle--clone--add">Add Position</a>
+            <a class="circle--clone--remove">Remove</a>
+          </li>
+        </ul>
+
+        <!--<a class="button button-primary" href="project.html">Save Changes</a>
+
+      </div>
+    </div>
+
+    <div class="grid-25 grid-push-5">
+
+      <div class="circle--secondary--module">
+        <h3>Project Timeline</h3>
+        <textarea placeholder="Time estimate" class="circle--textarea--input"></textarea>
+      </div>
+
+      <div class="circle--secondary--module">
+        <h3>Applicant Requirements</h3>
+        <textarea></textarea>
+      </div>
+
+    </div>
+  </div>-->
