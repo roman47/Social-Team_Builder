@@ -7,7 +7,6 @@
 
   <div class="bounds circle--page">
     <div class="circle--page--header circle--fluid">
-
       <div class="circle--fluid--cell circle--fluid--secondary">
         <a class="button icon-on-left" href="{% url 'accounts:profile-update' user.pk %}">Edit Profile</a>
       </div>
@@ -30,22 +29,18 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="clickable-row" data-href="project.html">
+         {% for i in object.project.all %}
+         <tr class="clickable-row" data-href="project.html">
             <td>
-              <h3>Invoice Delivery Tool</h3>
+              <h3><a href="{% url 'accounts:project' i.id %}">{{ i.name }}</a></h3>
             </td>
+           {% for j in i.position.all %}
             <td class="circle--cell--right">
-              <span class="secondary-label">Rails Developer</span>
+              <span class="secondary-label">{{ j.name }}</span>
             </td>
+          {% endfor %}
           </tr>
-          <tr class="clickable-row" data-href="project.html">
-            <td>
-              <h3>Twitter Client</h3>
-            </td>
-            <td class="circle--cell--right">
-              <span class="secondary-label">Designer</span>
-            </td>
-          </tr>
+          {% endfor %}
         </tbody>
       </table>
     </div>
@@ -69,11 +64,10 @@
 
       <div class="circle--secondary--module">
         <h4>My Projects</h4>
-        <ul class="circle--link--list">
-          <li><a>Project 1</a></li>
-          <li><a>Project 2</a></li>
-          <li><a>Project 3</a></li>
-          <li><a>Project 4</a></li>
+        <ul class="unloaded">
+         {% for i in object.project.all %}
+          <li> <a href="{% url 'accounts:project' i.id %}">{{ i.name }}</a></li>
+          {% endfor %}
         </ul>
       </div>
     </div>

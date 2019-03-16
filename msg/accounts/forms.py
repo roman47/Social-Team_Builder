@@ -38,6 +38,38 @@ SkillFormSet = inlineformset_factory(models.User, models.Skill,
                                      form=SkillForm, extra=1)
 
 
+class ProjectForm(ModelForm):
+    class Meta:
+        model = models.Project
+        fields = [
+            'name',
+        ]
+
+
+ProjectFormSet = inlineformset_factory(models.User, models.Project,
+                                       form=ProjectForm, extra=1)
+
+
+class PositionForm(ModelForm):
+    class Meta:
+        model = models.Position
+        fields = '__all__'
+
+
+PositionFormSet = inlineformset_factory(models.Project, models.Position,
+                                       form=PositionForm, extra=1)
+
+
+
+
+
+
+
+
+
+
+
+
 class ProfileForm(ModelForm):
     class Meta:
         model = models.Profile

@@ -21,9 +21,10 @@ from . import views
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings
 from django.conf.urls.static import static
+from django.http import HttpResponseRedirect
 
 urlpatterns = [
-    url(r"^$", views.Home.as_view(), name="home"),
+    url(r"^$", lambda r: HttpResponseRedirect('accounts/'), name='home'),
     url(r"^admin/", admin.site.urls),
     url(r'^accounts/', include(('accounts.urls', 'accounts'), namespace='accounts')),
     url(r"^accounts/", include("django.contrib.auth.urls")),

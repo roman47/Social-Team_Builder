@@ -84,10 +84,39 @@ class Project(models.Model):
 
 
 class Position(models.Model):
-    project = models.ForeignKey(Project, related_name='project',
+    project = models.ForeignKey(Project, related_name='position',
                              on_delete=models.CASCADE)
     name = models.CharField(max_length=40, unique=True)
     description = models.CharField(max_length=140)
+
+
+class Applicant(models.Model):
+    user = models.ForeignKey(User, related_name='applicant',
+                             on_delete=models.CASCADE)
+    position = models.ForeignKey(Position,
+                             on_delete=models.CASCADE)
+    # null is applied, True is accepted, False is rejected
+    accepted = models.NullBooleanField()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 class Profile(models.Model):
