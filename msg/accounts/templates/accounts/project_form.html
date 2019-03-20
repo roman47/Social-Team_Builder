@@ -38,10 +38,17 @@
             </table>
 
 
-            <input type="submit" value="Save Changes"/> <a href="{% url 'accounts:project' project.id  %}"> back to the profile</a>
+            <input type="submit" value="Save Changes"/> <a href="{% url 'accounts:project' project.id  %}"> back to the project</a>
         </form>
     </div>
 
+    <script type="text/javascript">
+        $('.formsetPosition_row').formset({
+            addText: 'add position',
+            deleteText: 'remove',
+            prefix: 'position'
+        });
+    </script>
 {% endblock %}
 
 <!--

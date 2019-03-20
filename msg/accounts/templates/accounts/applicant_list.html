@@ -5,7 +5,11 @@
 {% block body_content %}
  <div class="bounds circle--page">
     <div class="circle--page--header grid-100">
-      <h2>Applications</h2>
+      {% if username %}
+        <h2>Notifications for {{ username}}</h2>
+      {% else %}
+        <h2>Applications</h2>
+      {% endif %}
     </div>
    <div class="grid-70 grid-push-5">
       <table class="u-full-width circle--table">

@@ -42,8 +42,9 @@
         </div>
         <div class="circle--fluid--cell circle--fluid--primary">
           <div class="circle--search">
-              <form id="searchform" action="{% url 'accounts:search' %}" method="get" accept-charset="utf-8">
-            <input type="text" name="name" placeholder="Search Projects..."/>
+            <form id="searchform" action="{% url 'accounts:search' %}" method="get" accept-charset="utf-8">
+            <input type="text" name="name" placeholder="Search Project Name..."/>
+            <input type="text" name="description" placeholder="Search Project Description..."/>
             <button type="submit">
               <svg version="1.1" class="search" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 12 12" xml:space="preserve">
                 <path d="M12,10.6L8.3,6.9C8.7,6.2,9,5.4,9,4.5C9,2,7,0,4.5,0S0,2,0,4.5S2,9,4.5,9c0.9,0,1.7-0.3,2.4-0.7l3.7,3.7L12,10.6z M2,4.5
@@ -87,25 +88,5 @@
  {% endif %}
   {% block body_content %}{% endblock %}
 </body>
-
-    <script type="text/javascript">
-        $('.formset_row').formset({
-            addText: 'add skill',
-            deleteText: 'remove',
-            prefix: 'skill_set'
-        });
-
-        $('.formsetProject_row').formset({
-            addText: 'add project',
-            deleteText: 'remove',
-            prefix: 'project_set'
-        });
-
-        $('.formsetPosition_row').formset({
-            addText: 'add position',
-            deleteText: 'remove',
-            prefix: 'position_set'
-        });
-    </script>
 
 </html>

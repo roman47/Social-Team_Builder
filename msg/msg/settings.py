@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'accounts',
     'communities',
     'posts',
-    'betterforms'
+    'betterforms',
+    'djangoformsetjs',
 ]
 
 MIDDLEWARE = [

@@ -129,6 +129,8 @@ class ProjectEdit(UpdateView):
     def form_valid(self, form):
         context = self.get_context_data()
         position = context['position']
+        #import pdb;
+        #pdb.set_trace()
         with transaction.atomic():
             self.object = form.save()
             if position.is_valid():
@@ -234,3 +236,9 @@ class Messages(generic.ListView):
         user_id = self.request.user.id
         queryset = models.Applicant.objects.filter(user_id=user_id).filter(accepted__isnull=False)
         return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super(Messages, self).get_context_data(
+            **kwargs)  # get the default context data
+        context['username'] = self.request.user.username
+        return context

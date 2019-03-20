@@ -70,6 +70,20 @@
             <input type="submit" value="Save Changes"/> <a href="{% url 'accounts:profile' %}">back to the profile</a>
         </form>
     </div>
+
+    <script type="text/javascript">
+        $('.formset_row').formset({
+            addText: 'add skill',
+            deleteText: 'remove',
+            prefix: 'skill'
+        });
+
+        $('.formsetProject_row').formset({
+            addText: 'add project',
+            deleteText: 'remove',
+            prefix: 'project'
+        });
+    </script>
 {% endblock %}
 
  <!--<div class="grid-70">
